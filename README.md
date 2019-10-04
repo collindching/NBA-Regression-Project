@@ -8,7 +8,27 @@ You'd break this down into: which combination of traits would, according to your
 
 Obviously, this depends on the NBA talent pool for a given year. Maybe certain traits matter more than others.
 
-Optimize for fantasy basketball?
+1. Win-loss using team composition
+2. Analysis at a player level (need roster data)
+3. Salary considerations
+
+Difference between win-loss and scoring. My project is more of a scoring project.
+
+Good ideas that might not be pursued:
+
+- Look at match ups against the best team, like Warriors. Could I compose a great team to play against them?
+- Look at how coaching fits into the picture
+- Shot locations
+- How to win fantasy league
+
+**Project notes**
+- Tried pd.read_table()... didn't extract data
+- Tried BeautifulSoup... didn't work because tables were dynamically loaded
+- Switched over to Selenium + BeautifulSoup, using Selenium to render, then passing html to BeautifulSoup
+- Webscraping didn't work for most tables; switching over to Seleniu
+
+
+
 
 #### Keys
 
@@ -22,9 +42,20 @@ Optimize for fantasy basketball?
     - Who spends the most per point?
 - Apply different types of analysis, think about angles and be thoughtful
 
-**Tools used:** BeautifulSoup, Pandas, Scikit-Learn, MySQL
+**Tools to use:** 
+- Data acquisition: BeautifulSoup, Selenium
+- Storage: MySQL
+- Cleaning: Pandas
+- Visualizations: D3.js, Matplotlib, Seaborn
+- Modeling: Scikit-Learn
 
-### Brainstorm 
+Other tools to use? Plotly, Bokeh, Chartify, XGBoost, Neural Nets (TensorFlow, fastai), ELI5, LIME, H20, PyOD
+
+SpaCy for text
+
+## Brainstorm 
+
+Levels of analysis: win-loss analyzed through team stats, comparing performance based on individual skill variance on team, trying to predict player salary based on 
 
 ####  Possible regressions
 
@@ -34,14 +65,18 @@ Optimize for fantasy basketball?
 
 #### Questions
 
+- Have game scores increased over time?
+- What defense statistics are there? Which are most important?
+    - Use blocks, or steals, or blocks + steals as a proxy for defense skill
+- Better to have higher defense on average? Or to have a couple strong defenders who can take out star scorers
+- How does defense affect scoring, and offense?
 - How to combine teams? 
 - What time of strategy is best? All-round? Specialized?
-- How does defense affect scoring, and offense?
-- Better to have higher defense on average? Or to have a couple strong defenders who can take out star scorers
 - Defense: DFG%
 - Which players are undervalued?
 - Predict player salaries
 - How deep is your bench?
+- How does average age affect performance? 
 
 #### Hypotheses
 
@@ -51,23 +86,50 @@ Optimize for fantasy basketball?
 - A diversity of attributes is good for a well-rounded team; some teams that do well, though, will specialize more in a specific attribute
 - Spurs strategy is good despite not being how a lot of the NBA plays
 
-**Data to use**
+## Plan:
 
-- Target: game scores 
+- Tuesday: 
+    - ~~Scope out project~~
+    - Scrape game scores for 5 seasons of NBA games, dating to 2013-2014 from [here](https://www.basketball-reference.com/leagues/NBA_2019.html#all_team-stats-base)
+- Wednesday: 
+    - Scrape team shooting stats per season
+    - Do a cursory clean
+    - Some exploration
+    - Baseline regression
+- Thursday: 
+    - Scrape team per 100 possessions stats
+    - Some exploration
+    - Incorporate new data into regression
+- Friday: 
+    - Scrape shooting efficiency with Selenium from [here](https://stats.nba.com/teams/shooting-efficiency/?Season=2018-19&SeasonType=Regular%20Season)
+    - Another regression
+- Saturday: 
+    - Scrape team rosters under Team --> starting lineup in "More"
+
+    - Study different regression models
+- Sunday 
+    - Run the different models
+    - Tune the models
+- Monday
+    - Finalize some interesting findings
+- Tuesday
+    - Create presentation
+- Wednesday
+
+
+
+#### Data to use
+
 - Shot efficiency
     - [Shooting efficiency](https://stats.nba.com/teams/shooting-efficiency/?Season=2018-19&SeasonType=Regular%20Season)
     - [Players shooting data](https://stats.nba.com/players/shooting/?Season=2018-19&SeasonType=Playoffs&DistanceRange=By%20Zone)
 - Player efficiency rating
 - Defensive statistics
 - [NBA stats API](https://pypi.org/project/nba-api/)
+- 
+https://stackoverflow.com/questions/17597424/how-to-retrieve-the-values-of-dynamic-html-content-using-python- 
 
-## Plan:
-
-- Tuesday: scope out project, scrape game scores
-- Wednesday: scrape a few datasets, cursory clean, and baseline regression
-- Thursday: 
-- Friday:
-- Saturday: 
+https://stackoverflow.com/questions/51897756/table-element-not-showing-in-beautifulsoup
 
 **Steps**
 
